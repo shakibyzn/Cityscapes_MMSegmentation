@@ -22,14 +22,14 @@ for split in "train" "val" "test"; do
         # Create target subfolder if it doesn't exist
         mkdir -p "$target_subfolder"
 
-        # Convert and compress images
+        # Convert and compress images to JPEG
         for image in "$subfolder"*.png; do
-            image_name=$(basename "$image")
-            target_image="$target_subfolder/$image_name"
+            image_name=$(basename "$image" .png)  # Remove .png extension
+            target_image="$target_subfolder/$image_name.jpg"  # Use .jpg extension
 
             convert -quality "$quality" "$image" "$target_image"
         done
     done
 done
 
-echo "Conversion and compression complete."
+echo "Conversion and compression to JPEG complete."
